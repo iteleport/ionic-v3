@@ -8,7 +8,7 @@ export class ActionSheetSlideIn extends Transition {
     const backdrop = new Animation(this.plt, ele.querySelector('ion-backdrop'));
     const wrapper = new Animation(this.plt, ele.querySelector('.action-sheet-wrapper'));
 
-    backdrop.fromTo('opacity', 0.01, 0.4);
+    backdrop.fromTo('opacity', 0.01, 0.8);
     wrapper.fromTo('translateY', '100%', '0%');
 
     this.easing('cubic-bezier(.36,.66,.04,1)').duration(400).add(backdrop).add(wrapper);
@@ -22,7 +22,7 @@ export class ActionSheetSlideOut extends Transition {
     const backdrop = new Animation(this.plt, ele.querySelector('ion-backdrop'));
     const wrapper = new Animation(this.plt, ele.querySelector('.action-sheet-wrapper'));
 
-    backdrop.fromTo('opacity', 0.4, 0);
+    backdrop.fromTo('opacity', 0.8, 0);
     wrapper.fromTo('translateY', '0%', '100%');
 
     this.easing('cubic-bezier(.36,.66,.04,1)').duration(300).add(backdrop).add(wrapper);

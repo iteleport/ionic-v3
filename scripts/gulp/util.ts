@@ -274,6 +274,12 @@ export function createTimestamp() {
           ('0' + (d.getUTCMinutes())).slice(-2); // MM
 }
 
+const zoneAddons = [
+  'node_modules/zone.js/dist/webapis-media-query.min.js',
+  'node_modules/zone.js/dist/webapis-rtc-peer-connection.min.js',
+  'node_modules/zone.js/dist/zone-patch-user-media.min.js',
+];
+
 export function writePolyfills(outputDirectory: string) {
   const MODERN_ENTRIES = [
     'node_modules/core-js/es6/array.js',
@@ -289,6 +295,7 @@ export function writePolyfills(outputDirectory: string) {
     'node_modules/core-js/es7/reflect.js',
     'node_modules/core-js/es6/reflect.js',
     'node_modules/zone.js/dist/zone.js',
+    ...zoneAddons,
     'scripts/polyfill/polyfill.dom.js'
   ];
 
@@ -312,12 +319,14 @@ export function writePolyfills(outputDirectory: string) {
     'node_modules/core-js/es6/weak-set.js',
     'node_modules/core-js/es7/reflect.js',
     'node_modules/zone.js/dist/zone.js',
+    ...zoneAddons,
     'scripts/polyfill/polyfill.dom.js'
   ];
 
   const NG_ENTRIES = [
     'node_modules/core-js/es7/reflect.js',
     'node_modules/zone.js/dist/zone.js',
+    ...zoneAddons,
   ];
 
   let promises = [];

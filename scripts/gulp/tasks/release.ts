@@ -48,7 +48,7 @@ task('release.test', (done: (err: any) => void) => {
 
 // Release.update: update package.json and changelog
 task('release.update', (done: (err: any) => void) => {
-  if (promptAnswers.confirmRelease === 'yes') {
+  if (promptAnswers && promptAnswers.confirmRelease === 'yes') {
     runSequence('release.copyProdVersion',
                 'release.prepareChangelog',
                 done);
@@ -60,7 +60,7 @@ task('release.update', (done: (err: any) => void) => {
 
 // Release.publish: publish to GitHub and npm
 task('release.publish', (done: (err: any) => void) => {
-  if (promptAnswers.confirmRelease === 'yes') {
+  if (promptAnswers && promptAnswers.confirmRelease === 'yes') {
     runSequence('release.publishNpmRelease',
                 'release.publishGithubRelease',
                 done);
@@ -88,8 +88,8 @@ task('release.publishGithubRelease', (done: Function) => {
   .pipe(obj(function(file, enc, cb) {
     github.releases.createRelease({
       owner: 'ionic-team',
-      repo: 'ionic',
-      target_commitish: 'master',
+      repo: 'ionic-v3',
+      target_commitish: 'v3',
       tag_name: 'v' + packageJSON.version,
       name: packageJSON.version,
       body: file.toString(),
@@ -273,8 +273,9 @@ task('release.pullLatest', (done: Function) => {
       const gitPullResult = spawnSync('git', ['pull', 'origin', 'master']);
       if (gitPullResult.status !== 0) {
         done(new Error('Error running git pull'));
+      } else {
+        done();
       }
-      done();
     }
   });
 });
